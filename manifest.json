@@ -1,0 +1,14 @@
+{
+    "name": "Nom de votre application",
+    "short_name": "Nom court",
+    "icons": [
+      {
+        "src": "icone.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone"
+  }
+  
