@@ -572,86 +572,72 @@
 </div>
 
 
-<!-- <div class="blog-area py-120">
+<div class="blog-area py-120">
+
+    <?php
+
+        $reqArticle = $database->prepare("SELECT * FROM blog WHERE statut=:statut ORDER BY id DESC LIMIT 0, 3");
+        $reqArticle->bindvalue(":statut", 1);
+        $reqArticle->execute();
+
+        $countArticle = $reqArticle->rowCount();
+
+    ?>
+
 <div class="container">
 <div class="row">
 <div class="col-lg-6 mx-auto wow fadeInDown" data-wow-duration="1s" data-wow-delay=".25s">
 <div class="site-heading text-center">
-<span class="site-title-tagline">Our Blog</span>
-<h2 class="site-title">Our Latest News & Blog</h2>
+<span class="site-title-tagline">Notre Blog</span>
+<h2 class="site-title">Nos récentes informations</h2>
 </div>
 </div>
 </div>
 <div class="row">
-<div class="col-md-6 col-lg-4">
-<div class="blog-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".25s">
-<div class="blog-item-img">
-<img src="assets/img/blog/01.jpg" alt="Thumb">
-</div>
-<div class="blog-item-info">
-<h4 class="blog-title">
-<a href="#">There are many variations of passages available suffer</a>
-</h4>
-<div class="blog-item-meta">
-<ul>
-<li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
-<li><a href="#"><i class="far fa-calendar-alt"></i> May 12, 2023</a></li>
-</ul>
-</div>
-<p>
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
-</p>
-<a class="theme-btn" href="#">Read More<i class="far fa-arrow-right"></i></a>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-4">
-<div class="blog-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".50s">
-<div class="blog-item-img">
-<img src="assets/img/blog/02.jpg" alt="Thumb">
-</div>
-<div class="blog-item-info">
-<h4 class="blog-title">
-<a href="#">There are many variations of passages available suffer</a>
-</h4>
-<div class="blog-item-meta">
-<ul>
-<li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
-<li><a href="#"><i class="far fa-calendar-alt"></i> May 12, 2023</a></li>
-</ul>
-</div>
-<p>
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
-</p>
-<a class="theme-btn" href="#">Read More<i class="far fa-arrow-right"></i></a>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-lg-4">
-<div class="blog-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".75s">
-<div class="blog-item-img">
-<img src="assets/img/blog/03.jpg" alt="Thumb">
-</div>
-<div class="blog-item-info">
-<h4 class="blog-title">
-<a href="#">There are many variations of passages available suffer</a>
-</h4>
-<div class="blog-item-meta">
-<ul>
-<li><a href="#"><i class="far fa-user-circle"></i> By Alicia Davis</a></li>
-<li><a href="#"><i class="far fa-calendar-alt"></i> May 12, 2023</a></li>
-</ul>
-</div>
-<p>
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.
-</p>
-<a class="theme-btn" href="#">Read More<i class="far fa-arrow-right"></i></a>
+    <?php
+
+        if ($countArticle){
+            while ($dataArticle = $reqArticle->fetch()) {
+                $photo = $dataArticle['image'];
+                ?>
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".25s">
+                        <div class="blog-item-img">
+                            <img src="upload/Blog/<?=$photo?>" alt="Thumb">
+                        </div>
+                        <div class="blog-item-info">
+                            <h4 class="blog-title">
+                            <a href="#"><?=$dataArticle['titre']?></a>
+                            </h4>
+                            <div class="blog-item-meta">
+                            <ul>
+                            <li><a href="#"><i class="far fa-user-circle"></i> By ConfortHouse</a></li>
+                            <li><a href="#"><i class="far fa-calendar-alt"></i> <?=$dataArticle['date'][8] . $dataArticle['date'][9] . $dataArticle['date'][7] . $dataArticle['date'][5] . $dataArticle['date'][6] . $dataArticle['date'][4] . $dataArticle['date'][0] . $dataArticle['date'][1] . $dataArticle['date'][2] . $dataArticle['date'][3]?></a></li>
+                            </ul>
+                        </div>
+                        <p>
+                            <?=substr($dataArticle['texte'], 0, 100)?> ....
+                            
+                        </p>
+                        <a class="theme-btn" href="blog-single.php?id=<?=$dataArticle['id_article']?>">LIre plus<i class="far fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <?php
+    
+            }
+        }else{
+            #........
+        }
+
+    ?>
+
+
+
+
 </div>
 </div>
 </div>
-</div>
-</div>
-</div> -->
 
 </main>
 

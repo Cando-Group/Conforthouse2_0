@@ -19,8 +19,9 @@
         // $reqMot->bindvalue(":statut", 1);
         // $reqMot->execute();
 
-        $reqMot = $database->prepare('SELECT * FROM annonces WHERE titre LIKE "%'.$search.'%" OR localisation LIKE "%'.$search.'%" OR prix LIKE "%'.$search.'%" OR description LIKE "%'.$search.'%" OR pays LIKE "%'.$search.'%" AND louer=:louer ORDER BY id DESC');
+        $reqMot = $database->prepare('SELECT * FROM annonces WHERE titre LIKE "%'.$search.'%" OR localisation LIKE "%'.$search.'%" OR prix LIKE "%'.$search.'%" OR description LIKE "%'.$search.'%" OR pays LIKE "%'.$search.'%" AND louer=:louer AND statut=:statut ORDER BY id DESC');
         $reqMot->bindvalue(":louer", "non");
+        $reqMot->bindvalue(":statut", 1);
 		$reqMot->execute();
 
         $countMot = $reqMot->rowCount();
