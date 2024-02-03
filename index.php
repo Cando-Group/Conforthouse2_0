@@ -10,8 +10,6 @@
 
     // echo "Update terminé";
 
-    
-    
 
     // Count dun nombre d'annonce par catégorie
 
