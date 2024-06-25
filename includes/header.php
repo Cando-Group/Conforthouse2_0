@@ -120,13 +120,13 @@ session_start();
 <!-- Google Analytics Conforthouse -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WWWL4R4JLB"></script>
-<script>
+<!-- <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'G-WWWL4R4JLB');
-</script>
+</script> -->
 
 </head>
 <body class="home-3">
