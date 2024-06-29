@@ -1,24 +1,31 @@
 <?php
 
-$apiUrl = 'https://api.affectlac.com//api/annonces/annonces_by_categorie';
+$apiUrl = 'https://api.affectlac.com/api/annonces/annonces_by_categorie';
+$apiKey = 'your_api_key_here'; // Replace with your actual API key
 $categoryId = '1';
 
 $requestData = [
-    'categorie' => $categoryId,
+    'categorie_id' => $categoryId,
     'limit' => 10
 ];
 
 $jsonData = json_encode($requestData);
 
-$curl = curl_init($apiUrl);
+$curl = curl_init();
 
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_POSTFIELDS, $jsonData);
-curl_setopt($curl, CURLOPT_HTTPHEADER, [
-    'Content-Type: application/json',
-    'X-Api-Key: ' . $apiKey
+curl_setopt_array($curl, [
+    CURLOPT_URL => $apiUrl,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => $jsonData,
+    CURLOPT_HTTPHEADER => [
+        'Content-Type: application/json',
+    ],
 ]);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 $response = curl_exec($curl);
 
@@ -30,10 +37,16 @@ if (curl_errno($curl)) {
 curl_close($curl);
 
 $responseData = json_decode($response, true);
+var_dump($responseData);
 
-if ($responseData['success']) {
-    echo "Annonces par catégorie récupérées avec succès !\n";
-    print_r($responseData['data']);
+
+if ($responseData && isset($responseData['success'])) {
+    if ($responseData['success']) {
+        echo "Annonces par catégorie récupérées avec succès !\n";
+        print_r($responseData['data']);
+    } else {
+        echo "Erreur lors de la récupération des annonces: " ;
+    }
 } else {
-    echo "Erreur lors de la récupération des annonces: " . $responseData['error'];
+    echo "Réponse invalide de l'API";
 }
